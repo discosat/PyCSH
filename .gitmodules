@@ -13,3 +13,6 @@
 [submodule "lib/apm_csh"]
 	path = lib/apm_csh
 	url = https://github.com/spaceinventor/libapm_csh
+[submodule "lib/csp_proc"]
+	path = lib/csp_proc
+	url = https://github.com/discosat/csp_proc.git

@@ -20,14 +20,21 @@ project('csh_bindings', 'c', subproject_dir: 'lib', default_options: [
 	'param:commands_client=true',
 	'param:scheduler_client=true',
 	'param:collector=false',
-	'param:list_dynamic=true',],
+	'param:list_dynamic=true',
+	'csp_ippc:slash=true', 
+	'csp_proc:slash=true',
+	'csp_proc:RESERVED_PROC_SLOTS=10',],
 	version: run_command('./get_pip_ersion.py').stdout().strip())
 
-add_global_arguments('-I../include', language: 'c')
+add_global_arguments('-I../include', '-Wno-error=implicit-function-declaration', '-Wno-error=incompatible-pointer-types', language: 'c')
 
 conf = configuration_data()
 
 dependencies = []
+
+csp_proc_dep = dependency('csp_proc', fallback: ['csp_proc', 'csp_proc_dep'], required: true).as_link_whole()
+
+dependencies += csp_proc_dep
 
 if get_option('build_apm')
 	dependencies += dependency('apm_csh', fallback: ['apm_csh', 'apm_csh_dep'], required: true)
