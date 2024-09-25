@@ -13,7 +13,7 @@ except ModuleNotFoundError:  # Let's try and recompile the bindings.
     print('Failed to import CSH Python bindings. Attempting to recompile...')
     # Compile for our current version of Python.
     _os.system(f"rm -r {_builddir}; "
-               f"meson {_abspath or '.'} {_builddir} -Dpython3_versions=python3.{_sys.version_info.minor} && "
+               f"meson {_abspath or '.'} {_builddir} -Dpython3_version=python3.{_sys.version_info.minor} && "
                f"ninja -C {_builddir}")
     try:  # Using relative import.
         from .builddir.pycsh import *  # Welp, here goes nothing...
